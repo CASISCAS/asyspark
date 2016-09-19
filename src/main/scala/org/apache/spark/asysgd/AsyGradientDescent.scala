@@ -88,24 +88,21 @@ object AsyGradientDescent extends Logging {
       * For the first iteration, the regVal will be initialized as sum of weight squares
       * if it's L2 updater; for L1 updater, the same logic is followed.
       */
-    var regVal = updater.compute(
-      weights, Vectors.zeros(weights.size), 0, 1, regParam)._2
+    // todo add regval
+    //    var regVal = updater.compute(weights, Vectors.zeros(weights.size), 0, 1, regParam)._2
 
-    var converged = false // indicates whether converged based on convergenceTol
-    var i = 1
 
     data.foreachPartition {
       partition =>
-        val coveraged = false
-        val i = 0
-        while (i < numIterations && !coveraged) {
-          val loss = 0
+        var convergence = false
+        var i = 0
+        while (i < numIterations && !convergence) {
           // todo can do some optimization
           //          val timesPerIter =10
           //          for(j <- 0 until timesPerIter) {
           //
           //          }
-          val bcWeight = GlobaLWeight.weight
+          val bcWeight = GlobalWeight.getWeight()
           // todo we can do a sample to avoid use all the data
 
           // compute gradient
@@ -114,27 +111,29 @@ object AsyGradientDescent extends Logging {
               val l = gradient.compute(v._2, v._1, bcWeight, Vectors.fromBreeze(c._1))
               (c._1, c._2 + l)
             },
-            comOp = (c1, c2) => {
+            combop = (c1, c2) => {
               (c1._1 += c2._1, c1._2 + c2._2)
             }
           )
           // update gradient
-          val elementNum = partition.count()
+          val elementNum = partition.count(x => true)
           if (elementNum > 0) {
             stochasticLossHistory += lossSum / elementNum
             // todo check whether update success
-            val (success , convergence) = GlobaLWeight.updateWeight(weights, Vectors.fromBreeze(gradientSum / elementNum), stepSize, i, regParam, convergenceTol)
+            val (success, conFlag) = GlobalWeight.updateWeight(weights, Vectors.fromBreeze(gradientSum / elementNum.toDouble), stepSize, i, regParam, convergenceTol)
 
-            if(convergence) {
-              converged = true
+            if (conFlag) {
+              convergence = true
             }
           } else {
             logWarning(s" sorry, this partition has no elements, this worker will stop")
-            converged = true
+            convergence = true
           }
           i += 1
         }
     }
+    (GlobalWeight.getWeight(), stochasticLossHistory.toArray)
+
   }
 
 
