@@ -50,12 +50,9 @@ object AsySGDExample {
       miniBatchFrac,
       initialWeightsWithIntercept,
       convergenceTolerance)
-
-
   }
 
 }
-
 
 object GradientDescentSuite {
 
@@ -86,7 +83,6 @@ object GradientDescentSuite {
       val yVal = offset + scale * x1(i) + rLogis(i)
       if (yVal > 0) 1 else 0
     }
-
     (0 until nPoints).map(i => LabeledPoint(y(i), Vectors.dense(x1(i))))
   }
 }

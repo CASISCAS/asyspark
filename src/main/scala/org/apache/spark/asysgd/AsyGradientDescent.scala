@@ -1,14 +1,13 @@
 package org.apache.spark.asysgd
 
-import breeze.linalg.{norm, DenseVector => BDV}
+import breeze.linalg.{DenseVector => BDV}
 import org.apache.spark.internal.Logging
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
-import org.apache.spark.mllib.optimization.GradientDescent._
 import org.apache.spark.mllib.optimization.{Gradient, Updater}
 import org.apache.spark.rdd.RDD
-import sun.util.logging.resources.logging
 
 import scala.collection.mutable.ArrayBuffer
+
 import scala.reflect.internal.util.Collections
 
 /**
@@ -63,10 +62,6 @@ object AsyGradientDescent extends Logging {
     }
 
     val stochasticLossHistory = new ArrayBuffer[Double](numIterations)
-    // Record previous weight and current one to calculate solution vector difference
-
-    var previousWeights: Option[Vector] = None
-    var currentWeights: Option[Vector] = None
 
     val numExamples = data.count()
 
@@ -81,16 +76,23 @@ object AsyGradientDescent extends Logging {
     }
 
     // Initialize weights as a column vector
-    val weights = Vectors.dense(initialWeights.toArray)
-    val n = weights.size
+    val n = data.first()._2.size
+    GlobalWeight.setN(n)
+    if(initialWeights != null) {
+      val weights = Vectors.dense(initialWeights.toArray)
+      GlobalWeight.setWeight(weights)
+    } else {
+      GlobalWeight.initWeight()
+    }
 
+
+    // todo add regval
     /**
       * For the first iteration, the regVal will be initialized as sum of weight squares
       * if it's L2 updater; for L1 updater, the same logic is followed.
       */
-    // todo add regval
-    //    var regVal = updater.compute(weights, Vectors.zeros(weights.size), 0, 1, regParam)._2
 
+    //    var regVal = updater.compute(weights, Vectors.zeros(weights.size), 0, 1, regParam)._2
 
     data.foreachPartition {
       partition =>
@@ -120,7 +122,7 @@ object AsyGradientDescent extends Logging {
           if (elementNum > 0) {
             stochasticLossHistory += lossSum / elementNum
             // todo check whether update success
-            val (success, conFlag) = GlobalWeight.updateWeight(weights, Vectors.fromBreeze(gradientSum / elementNum.toDouble), stepSize, i, regParam, convergenceTol)
+            val (success, conFlag) = GlobalWeight.updateWeight(bcWeight, Vectors.fromBreeze(gradientSum / elementNum.toDouble), stepSize, i, regParam, convergenceTol)
 
             if (conFlag) {
               convergence = true
