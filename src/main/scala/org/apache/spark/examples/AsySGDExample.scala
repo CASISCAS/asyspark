@@ -6,10 +6,8 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.optimization.{GradientDescent, LogisticGradient, SimpleUpdater}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.util.MLUtils
-
 import scala.collection.JavaConverters._
 import scala.util.Random
-
 /**
   * Created by wjf on 16-9-19.
   */
@@ -83,7 +81,6 @@ object GradientDescentSuite {
                                    seed: Int): java.util.List[LabeledPoint] = {
     generateGDInput(offset, scale, nPoints, seed).asJava
   }
-
   // Generate input of the form Y = logistic(offset + scale * X)
   def generateGDInput(
                        offset: Double,

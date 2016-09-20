@@ -8,14 +8,12 @@ import org.apache.spark.rdd.RDD
 
 import scala.collection.mutable.ArrayBuffer
 
-import scala.reflect.internal.util.Collections
-
 /**
   * Created by wjf on 16-9-19.
   */
 object AsyGradientDescent extends Logging {
   /**
-    * Run asychronous stochastic gradient descent (SGD) in parallel using mini batches.
+    * Run asynchronous stochastic gradient descent (SGD) in parallel using mini batches.
     * In each iteration, we sample a subset (fraction miniBatchFraction) of the total data
     * in order to compute a gradient estimate.
     * Sampling, and averaging the subgradients over this subset is performed using one standard
@@ -148,10 +146,9 @@ object AsyGradientDescent extends Logging {
 
           i += 1
         }
+        println("this is iii"+ i )
     }
     (GlobalWeight.getWeight(), stochasticLossHistory.toArray)
-
   }
-
 
 }
