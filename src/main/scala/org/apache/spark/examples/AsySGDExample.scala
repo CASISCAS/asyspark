@@ -3,9 +3,10 @@ package org.apache.spark.examples
 import org.apache.spark.asysgd.AsyGradientDescent
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.linalg.Vectors
-import org.apache.spark.mllib.optimization.{LogisticGradient, SimpleUpdater}
+import org.apache.spark.mllib.optimization.{GradientDescent, LogisticGradient, SimpleUpdater}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.util.MLUtils
+
 import scala.collection.JavaConverters._
 import scala.util.Random
 
@@ -15,7 +16,7 @@ import scala.util.Random
 object AsySGDExample {
 
   def main(args: Array[String]): Unit = {
-    val sc = new SparkContext(new SparkConf().setAppName("test").setMaster("local"))
+    val sc = new SparkContext(new SparkConf().setAppName("test").setMaster("local[*]"))
     val nPoints = 10000
     val A = 2.0
     val B = -1.5
@@ -26,21 +27,24 @@ object AsySGDExample {
     val gradient = new LogisticGradient()
     val updater = new SimpleUpdater()
     val stepSize = 1.0
-    val numIterations = 10
+    val numIterations = 1000
     val regParam = 0
     val miniBatchFrac = 1.0
     val convergenceTolerance = 5.0e-1
 
     // Add a extra variable consisting of all 1.0's for the intercept.
     val testData = GradientDescentSuite.generateGDInput(A, B, nPoints, 42)
+
     val data = testData.map { case LabeledPoint(label, features) =>
       label -> MLUtils.appendBias(features)
     }
 
-    val dataRDD = sc.parallelize(data, 2).cache()
+    val dataRDD = sc.parallelize(data, 10).cache()
     val initialWeightsWithIntercept = Vectors.dense(initialWeights.toArray :+ 1.0)
 
-    AsyGradientDescent.runAsySGD(
+    // our asychronous implement
+    var start = System.nanoTime()
+    val (weights, weightHistory) = AsyGradientDescent.runAsySGD(
       dataRDD,
       gradient,
       updater,
@@ -50,10 +54,26 @@ object AsySGDExample {
       miniBatchFrac,
       initialWeightsWithIntercept,
       convergenceTolerance)
+    var end = System.nanoTime()
+    println((end - start) / 1e6 +"ms")
+    weights.toArray.foreach(println)
+    // use spark implement
+    start = System.nanoTime()
+    val (weight, weightHistorys) = GradientDescent.runMiniBatchSGD( dataRDD,
+      gradient,
+      updater,
+      stepSize,
+      numIterations,
+      regParam,
+      miniBatchFrac,
+      initialWeightsWithIntercept,
+      convergenceTolerance)
+    end = System.nanoTime()
+    println((end - start)/ 1e6 + "ms")
+    weight.toArray.foreach(println)
   }
 
 }
-
 object GradientDescentSuite {
 
   def generateLogisticInputAsList(
