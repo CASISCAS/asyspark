@@ -16,6 +16,11 @@
     <orderEntry type="library" name="Maven: org.uncommons.maths:uncommons-maths:1.2.2a" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.scala-logging:scala-logging-slf4j_2.11:2.1.2" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.scala-logging:scala-logging-api_2.11:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-remote_2.11:2.4.10" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-protobuf_2.11:2.4.10" level="project" />
+    <orderEntry type="library" name="Maven: org.uncommons.maths:uncommons-maths:1.2.2a" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.scala-logging:scala-logging-slf4j_2.11:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.scala-logging:scala-logging-api_2.11:2.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.spark-project.spark:unused:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.11:2.4.10" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe:config:1.3.0" level="project" />
