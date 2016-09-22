@@ -1,4 +1,4 @@
-package org.iscas.asyspark
+package org.iscas.asyspark.core
 
 import java.util.concurrent.TimeUnit
 
@@ -6,7 +6,6 @@ import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Address, Props, T
 import akka.util.Timeout
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.slf4j.StrictLogging
-import org.apache.spark.messages.{RegisterServer, ServerList}
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}

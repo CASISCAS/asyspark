@@ -1,4 +1,4 @@
-package org.iscas.asyspark
+package org.iscas.asyspark.core
 
 import java.io.File
 

@@ -1,4 +1,4 @@
-package org.iscas.asyspark.messages
+package org.iscas.asyspark.core.messages
 
 /**
   * Created by wjf on 16-9-22.

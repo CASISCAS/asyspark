@@ -1,4 +1,4 @@
-package org.iscas.asyspark.asysgd
+package org.iscas.asyspark.asyml.asysgd
 
 import breeze.linalg.{Vector => BV, axpy => brzAxpy, norm => brzNorm}
 import org.apache.spark.mllib.linalg.{Vector, Vectors}

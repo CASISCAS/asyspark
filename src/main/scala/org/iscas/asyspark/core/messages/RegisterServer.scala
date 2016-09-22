@@ -1,4 +1,4 @@
-package org.iscas.asyspark.messages
+package org.iscas.asyspark.core.messages
 
 import akka.actor.ActorRef
 

@@ -1,4 +1,4 @@
-package org.iscas.asyspark.asysgd
+package org.iscas.asyspark.asyml.asysgd
 
 import breeze.linalg.{DenseVector => BDV}
 import org.apache.spark.internal.Logging
