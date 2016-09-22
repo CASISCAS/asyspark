@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <profile name="Maven 1" modules="spark-asyspark_2.11">
-      <option name="deprecationWarnings" value="true" />
-      <option name="uncheckedWarnings" value="true" />
-      <option name="featureWarnings" value="true" />
+      <parameters>
+        <parameter value="-target:jvm-1.5" />
+      </parameters>
     </profile>
   </component>
 </project>
