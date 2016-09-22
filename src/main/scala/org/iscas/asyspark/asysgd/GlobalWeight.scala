@@ -1,7 +1,7 @@
-package org.apache.spark.asysgd
+package org.iscas.asyspark.asysgd
 
 import breeze.linalg.{Vector => BV, axpy => brzAxpy, norm => brzNorm}
-import org.apache.spark.mllib.linalg.{Vectors, Vector}
+import org.apache.spark.mllib.linalg.{Vector, Vectors}
 
 /**
   * Created by wjf on 16-9-19.

@@ -1,4 +1,4 @@
-package org.apache.spark
+package org.iscas.asyspark
 
 import java.util.concurrent.TimeUnit
 
@@ -8,8 +8,8 @@ import com.typesafe.config.Config
 import com.typesafe.scalalogging.slf4j.StrictLogging
 import org.apache.spark.messages.{RegisterServer, ServerList}
 
-import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Future}
 
 
 /**
@@ -45,6 +45,7 @@ class Master() extends Actor with ActorLogging {
   }
 
 }
+
 object Master extends StrictLogging {
   def run(config: Config): Future[(ActorSystem, ActorRef)] = {
     logger.info("Starting master actor system")

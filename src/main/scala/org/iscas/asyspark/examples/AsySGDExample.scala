@@ -1,4 +1,4 @@
-package org.apache.spark.examples
+package org.iscas.asyspark.examples
 
 import org.apache.spark.asysgd.AsyGradientDescent
 import org.apache.spark.mllib.linalg.Vectors

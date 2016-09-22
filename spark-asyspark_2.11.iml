@@ -265,5 +265,6 @@
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.11:2.4.10" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe:config:1.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-java8-compat_2.11:0.7.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.scopt:scopt_2.10:3.5.0" level="project" />
   </component>
 </module>
