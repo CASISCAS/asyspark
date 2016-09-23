@@ -1,7 +1,7 @@
-package org.iscas.asyspark.asyml.asysgd
+package org.apache.spark.asyspark.asyml.asysgd
 
 import breeze.linalg.{DenseVector => BDV}
-import org.apache.spark.internal.Logging
+import com.typesafe.scalalogging.slf4j.StrictLogging
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.mllib.optimization.{Gradient, Updater}
 import org.apache.spark.rdd.RDD
@@ -11,7 +11,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by wjf on 16-9-19.
   */
-object AsyGradientDescent extends Logging {
+object AsyGradientDescent extends StrictLogging {
   /**
     * Run asynchronous stochastic gradient descent (SGD) in parallel using mini batches.
     * In each iteration, we sample a subset (fraction miniBatchFraction) of the total data
@@ -50,12 +50,12 @@ object AsyGradientDescent extends Logging {
 
     // convergenceTol should be set with non minibatch settings
     if (miniBatchFraction < 1.0 && convergenceTol > 0.0) {
-      logWarning("Testing against a convergenceTol when using miniBatchFraction " +
+      logger.warn("Testing against a convergenceTol when using miniBatchFraction " +
         "< 1.0 can be unstable because of the stochasticity in sampling.")
     }
 
     if (numIterations * miniBatchFraction < 1.0) {
-      logWarning("Not all examples will be used if numIterations * miniBatchFraction < 1.0: " +
+      logger.warn("Not all examples will be used if numIterations * miniBatchFraction < 1.0: " +
         s"numIterations=$numIterations and miniBatchFraction=$miniBatchFraction")
     }
 
@@ -65,12 +65,12 @@ object AsyGradientDescent extends Logging {
 
     // if no data, return initial weights to avoid NaNs
     if (numExamples == 0) {
-      logWarning("GradientDescent.runMiniBatchSGD returning initial weights, no data found")
+      logger.warn("GradientDescent.runMiniBatchSGD returning initial weights, no data found")
       return (initialWeights, stochasticLossHistory.toArray)
     }
 
     if (numExamples * miniBatchFraction < 1) {
-      logWarning("The miniBatchFraction is too small")
+      logger.warn("The miniBatchFraction is too small")
     }
 
     // Initialize weights as a column vector
@@ -108,7 +108,7 @@ object AsyGradientDescent extends Logging {
         var i = 1
         val elementNum =  array.size
         if (elementNum <= 0) {
-          logWarning(s" sorry, this partition has no elements, this worker will stop")
+          logger.warn(s" sorry, this partition has no elements, this worker will stop")
           convergence = true
         }
         while (i <= numIterations && !convergence) {

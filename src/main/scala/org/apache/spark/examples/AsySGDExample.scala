@@ -1,6 +1,6 @@
-package org.iscas.asyspark.examples
+package org.apache.spark.examples
 
-import org.apache.spark.asysgd.AsyGradientDescent
+import org.apache.spark.asyspark.asyml.asysgd.AsyGradientDescent
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.optimization.{GradientDescent, LogisticGradient, SimpleUpdater}
 import org.apache.spark.mllib.regression.LabeledPoint

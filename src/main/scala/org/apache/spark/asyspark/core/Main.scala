@@ -1,11 +1,12 @@
-package org.iscas.asyspark.core
+package org.apache.spark.asyspark.core
 
 import java.io.File
 
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.slf4j.StrictLogging
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, ExecutionContext}
 
 /**
   * This is the main class that runs when you start asyspark. By manually specifying additional command-line options it is
@@ -62,15 +63,15 @@ object Main extends StrictLogging {
           case "server" => Server.run(config).onSuccess {
             case (system, ref) => sys.addShutdownHook {
               logger.info("Shutting down")
-              system.shutdown()
-              system.awaitTermination()
+              system.terminate()
+              Await.result(system.terminate(), Duration.Inf)
             }
           }
           case "master" => Master.run(config).onSuccess {
             case (system, ref) => sys.addShutdownHook {
               logger.info("Shutting down")
-              system.shutdown()
-              system.awaitTermination()
+              system.terminate()
+              Await.result(system.terminate(), Duration.Inf)
             }
           }
           case _ =>

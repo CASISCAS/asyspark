@@ -1,4 +1,4 @@
-package org.iscas.asyspark.core
+package org.apache.spark.asyspark.core
 
 import java.util.concurrent.TimeUnit
 
@@ -6,6 +6,7 @@ import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Address, Props, T
 import akka.util.Timeout
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.slf4j.StrictLogging
+import org.apache.spark.asyspark.core.messages.master.{RegisterServer, ServerList}
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
@@ -59,9 +60,7 @@ object Master extends StrictLogging {
       case actor: ActorRef =>
         logger.info("Master successfully started")
         (system, master)
-      case _ =>
-        logger.info("error")
-        (_, _)
+
     }
   }
 

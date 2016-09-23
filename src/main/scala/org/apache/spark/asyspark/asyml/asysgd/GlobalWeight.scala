@@ -1,4 +1,4 @@
-package org.iscas.asyspark.asyml.asysgd
+package org.apache.spark.asyspark.asyml.asysgd
 
 import breeze.linalg.{Vector => BV, axpy => brzAxpy, norm => brzNorm}
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
@@ -8,7 +8,7 @@ import org.apache.spark.mllib.linalg.{Vector, Vectors}
   */
 
 object GlobalWeight extends Serializable {
-  //TODO this is just a damo, will use a cluster to replace this
+  //TODO this is just a demo, will use a cluster to replace this
   //TODO the init weight can be optimized
   //TODO concurrent control should be optimized
   private var n: Int = 0
@@ -62,7 +62,6 @@ object GlobalWeight extends Serializable {
     val currentWeight = Vectors.fromBreeze(brzWeights)
     val flag = isConverged(weightsOld, currentWeight, convergenceTol)
     this.weight = Vectors.fromBreeze(brzWeights)
-
     this.regVal = 0.5 * regParam * norm * norm
     (true, flag)
   }
@@ -72,6 +71,11 @@ object GlobalWeight extends Serializable {
                            currentWeights: Vector,
                            convergenceTol: Double): Boolean = {
     // To compare with convergence tolerance.
+
+    /**
+      * maybe there a problems with previousWeights.toDense
+      * the before version is previousWeights.asBreeze.toDenseVector
+      */
     val previousBDV = previousWeights.asBreeze.toDenseVector
     val currentBDV = currentWeights.asBreeze.toDenseVector
 

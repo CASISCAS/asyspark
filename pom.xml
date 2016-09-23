@@ -111,6 +111,13 @@
             <version>3.5.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-remote_2.11</artifactId>
+            <version>2.4.10</version>
+        </dependency>
+
+
 
 
     </dependencies>
