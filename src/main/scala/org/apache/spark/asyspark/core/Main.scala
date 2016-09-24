@@ -47,7 +47,7 @@ object Main extends StrictLogging {
         c.copy(mode = "server")
       } text "Starts a server node."
     }
-    val arg =Array[String]("server")
+    val arg =Array[String]("server" )
     parser.parse(arg, Options()) match {
       case Some(options) =>
 
@@ -57,19 +57,20 @@ object Main extends StrictLogging {
         val config = ConfigFactory.parseFile(options.config).withFallback(default).resolve()
 
 
+        logger.debug("start server")
         // Start specified mode of operation
         implicit val ec = ExecutionContext.Implicits.global
         options.mode match {
           case "server" => Server.run(config).onSuccess {
             case (system, ref) => sys.addShutdownHook {
-              logger.info("Shutting down")
+              logger.debug("Shutting down")
               system.terminate()
               Await.result(system.terminate(), Duration.Inf)
             }
           }
           case "master" => Master.run(config).onSuccess {
             case (system, ref) => sys.addShutdownHook {
-              logger.info("Shutting down")
+              logger.debug("Shutting down")
               system.terminate()
               Await.result(system.terminate(), Duration.Inf)
             }
