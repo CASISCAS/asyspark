@@ -16,7 +16,7 @@ object AsySGDExample {
 
   def main(args: Array[String]): Unit = {
     val sc = new SparkContext(new SparkConf().setAppName("test").setMaster("local[*]"))
-    val nPoints = 10000
+    val nPoints = 4000000
     val A = 2.0
     val B = -1.5
 
@@ -38,7 +38,7 @@ object AsySGDExample {
       label -> MLUtils.appendBias(features)
     }
 
-    val dataRDD = sc.parallelize(data, 10).cache()
+    val dataRDD = sc.parallelize(data, 8).cache()
     val initialWeightsWithIntercept = Vectors.dense(initialWeights.toArray :+ 1.0)
 
     // our asychronous implement

@@ -38,6 +38,8 @@ private object Server extends StrictLogging {
     * @return A future containing the started actor system and reference to the server actor
     */
   def run(config: Config): Future[(ActorSystem, ActorRef)] = {
+    println("server run")
+
 
     logger.debug(s"Starting actor system ${config.getString("asyspark.server.system")}")
     val system = ActorSystem(config.getString("asyspark.server.system"), config.getConfig("asyspark.server"))
