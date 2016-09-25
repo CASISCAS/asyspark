@@ -1,4 +1,4 @@
-package org.apache.spark.asyspark.core.partition
+package org.apache.spark.asyspark.core.partitions
 
 /**
   * Created by wjf on 16-9-24.

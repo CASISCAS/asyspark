@@ -3,14 +3,15 @@ package org.apache.spark.asyspark.core
 import java.util.concurrent.TimeUnit
 import javassist.bytecode.stackmap.TypeTag
 
+import akka.actor._
 import akka.pattern.ask
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
-import akka.remote.ContainerFormats.ActorRef
 import akka.util.Timeout
 import com.typesafe.config.Config
 import org.apache.spark.asyspark.core.messages.master.RegisterClient
-import org.apache.spark.asyspark.core.partition.Partitioner
-import org.apache.spark.asyspark.core.partition.range.RangePartitioner
+import org.apache.spark.asyspark.core.models.client.BigVector
+import org.apache.spark.asyspark.core.partitions.Partitioner
+import org.apache.spark.asyspark.core.partitions.range.RangePartitioner
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
@@ -23,6 +24,7 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
   private implicit val timeout = Timeout(config.getDuration("asyspark.client.timeout", TimeUnit.MILLISECONDS) milliseconds)
   private implicit val ec = ExecutionContext.Implicits.global
   private[asyspark] val actor = system.actorOf(Props[ClientActor])
+  // use ask to get a reply
   private[asyspark] val registration = master ? RegisterClient(actor)
 
 
@@ -31,6 +33,8 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
   }
   def bigVector[V: breeze.math.Semiring: TypeTag](keys: Long, modelsPerServer: Int = 1,
                                                   createPartitioner: (Int, Long) => Partitioner): BigVector[V] = {
+
+    val prop
 
   }
 

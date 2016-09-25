@@ -1,6 +1,6 @@
-package org.apache.spark.asyspark.core.partition.range
+package org.apache.spark.asyspark.core.partitions.range
 
-import org.apache.spark.asyspark.core.partition.{Partition, Partitioner}
+import org.apache.spark.asyspark.core.partitions.{Partition, Partitioner}
 
 /**
   * Created by wjf on 16-9-24.
