@@ -6,10 +6,12 @@ import akka.actor.{Actor, ActorLogging, ActorSystem, Props, _}
 import akka.pattern.ask
 import akka.util.Timeout
 import com.typesafe.config.Config
+import com.typesafe.scalalogging.slf4j.StrictLogging
 import org.apache.spark.asyspark.core.messages.master.RegisterClient
 import org.apache.spark.asyspark.core.models.client.BigVector
-import org.apache.spark.asyspark.core.partitions.{Partition, Partitioner}
+import org.apache.spark.asyspark.core.models.server.{PartialVectorDouble, PartialVectorFloat, PartialVectorInt, PartialVectorLong}
 import org.apache.spark.asyspark.core.partitions.range.RangePartitioner
+import org.apache.spark.asyspark.core.partitions.{Partition, Partitioner}
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
@@ -19,7 +21,7 @@ import scala.reflect.runtime.universe.{TypeTag, typeOf}
   * Created by wjf on 16-9-24.
   */
 class Client(val config: Config, private[asyspark] val system: ActorSystem,
-             private[asyspark] val master: ActorRef) {
+             private[asyspark] val master: ActorRef) extends StrictLogging {
   private implicit val timeout = Timeout(config.getDuration("asyspark.client.timeout", TimeUnit.MILLISECONDS) milliseconds)
   private implicit val ec = ExecutionContext.Implicits.global
   private[asyspark] val actor = system.actorOf(Props[ClientActor])
@@ -35,6 +37,11 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
 
     val propFunction = numberType[V] match {
       case "Int" => (partition: Partition) => Props(classOf[PartialVectorInt], partition)
+      case "Long" => (partition: Partition) => Props(classOf[PartialVectorLong], partition)
+      case "Flaot" => (partition: Partition) => Props(classOf[PartialVectorFloat], partition)
+      case "Double" => (partition: Partition) => Props(classOf[PartialVectorDouble], partition)
+      case x =>
+        throw new Exception(s"cannot create model for unsupported value tupe")
 
     }
 
