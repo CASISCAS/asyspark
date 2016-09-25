@@ -1,20 +1,19 @@
 package org.apache.spark.asyspark.core
 
 import java.util.concurrent.TimeUnit
-import javassist.bytecode.stackmap.TypeTag
 
-import akka.actor._
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props, _}
 import akka.pattern.ask
-import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import akka.util.Timeout
 import com.typesafe.config.Config
 import org.apache.spark.asyspark.core.messages.master.RegisterClient
 import org.apache.spark.asyspark.core.models.client.BigVector
-import org.apache.spark.asyspark.core.partitions.Partitioner
+import org.apache.spark.asyspark.core.partitions.{Partition, Partitioner}
 import org.apache.spark.asyspark.core.partitions.range.RangePartitioner
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
+import scala.reflect.runtime.universe.{TypeTag, typeOf}
 /**
   * The client is to spawn a large distributed model such as BigVector on parameter servers
   * Created by wjf on 16-9-24.
@@ -34,8 +33,28 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
   def bigVector[V: breeze.math.Semiring: TypeTag](keys: Long, modelsPerServer: Int = 1,
                                                   createPartitioner: (Int, Long) => Partitioner): BigVector[V] = {
 
-    val prop
+    val propFunction = numberType[V] match {
+      case "Int" => (partition: Partition) => Props(classOf[PartialVectorInt], partition)
 
+    }
+
+  }
+
+  def numberType[V: TypeTag]: String = {
+    implicitly[TypeTag[V]].tpe match {
+      case x if x <:< typeOf[Int] => "Int"
+      case x if x <:< typeOf[Long] => "Long"
+      case x if x <:< typeOf[Float] => "Float"
+      case x if x <:< typeOf[Double] => "Double"
+      case x => s"${x.toString}"
+    }
+  }
+
+  /**
+    * Stops the client
+    */
+  def stop(): Unit ={
+    system.terminate()
   }
 
 }
