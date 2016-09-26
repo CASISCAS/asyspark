@@ -53,6 +53,7 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
 
     // Get a list of servers
     val listOfServers = serverList()
+    println(listOfServers.isCompleted)
 
     // Construct a big model based on the list of servers
     val bigModelFuture = listOfServers.map { servers =>

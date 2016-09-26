@@ -4,9 +4,9 @@ import java.io.File
 
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.slf4j.StrictLogging
+import org.apache.log4j.BasicConfigurator
 
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext}
+import scala.concurrent.ExecutionContext
 
 /**
   * This is the main class that runs when you start asyspark. By manually specifying additional command-line options it is
@@ -33,7 +33,7 @@ object Main extends StrictLogging {
     * @param args The command-line arguments
     */
   def main(args: Array[String]): Unit = {
-    // todo currently we don't support command line mode
+//    BasicConfigurator.configure()
 
     val parser = new scopt.OptionParser[Options]("asyspark") {
       head("asyspark", "0.1")
@@ -47,7 +47,7 @@ object Main extends StrictLogging {
         c.copy(mode = "server")
       } text "Starts a server node."
     }
-    val arg =Array[String]("server" )
+    val arg =Array[String]("server")
     parser.parse(arg, Options()) match {
       case Some(options) =>
 
@@ -57,22 +57,21 @@ object Main extends StrictLogging {
         val config = ConfigFactory.parseFile(options.config).withFallback(default).resolve()
 
 
-        logger.debug("start server")
         // Start specified mode of operation
         implicit val ec = ExecutionContext.Implicits.global
         options.mode match {
           case "server" => Server.run(config).onSuccess {
             case (system, ref) => sys.addShutdownHook {
-              logger.debug("Shutting down")
-              system.terminate()
-              Await.result(system.terminate(), Duration.Inf)
+              logger.info("Shutting down")
+              system.shutdown()
+              system.awaitTermination()
             }
           }
           case "master" => Master.run(config).onSuccess {
             case (system, ref) => sys.addShutdownHook {
-              logger.debug("Shutting down")
-              system.terminate()
-              Await.result(system.terminate(), Duration.Inf)
+              logger.info("Shutting down")
+              system.shutdown()
+              system.awaitTermination()
             }
           }
           case _ =>
