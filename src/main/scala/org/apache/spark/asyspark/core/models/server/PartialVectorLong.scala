@@ -3,7 +3,7 @@ package org.apache.spark.asyspark.core.models.server
 import org.apache.spark.asyspark.core.messages.server.request.{PullVector, PushVectorLong}
 import org.apache.spark.asyspark.core.messages.server.response.ResponseLong
 import org.apache.spark.asyspark.core.partitions.Partition
-
+import spire.implicits._
 /**
   * Created by wjf on 16-9-25.
   */

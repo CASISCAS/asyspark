@@ -6,11 +6,11 @@ import akka.actor.{ActorRef, ExtendedActorSystem}
 import akka.pattern.Patterns.gracefulStop
 import akka.serialization.JavaSerializer
 import breeze.linalg.DenseVector
+import breeze.math.Semiring
 import com.typesafe.config.Config
 import org.apache.spark.asyspark.core.messages.server.request.PullVector
 import org.apache.spark.asyspark.core.models.client.BigVector
 import org.apache.spark.asyspark.core.partitions.{Partition, Partitioner}
-import spire.algebra.Semiring
 import spire.implicits._
 
 import scala.concurrent.duration._

@@ -17,7 +17,7 @@ trait PushLogic {
   /**
     * Unique identifier counter
     */
-  var UID: Int = 0L
+  var UID: Int = 0
 
   /**
     * Increases the unique id and returns the next unique id

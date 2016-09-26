@@ -40,7 +40,7 @@ private[asyspark] abstract class PartialVector[@specialized V:Semiring : ClassTa
       }
       true
     } catch {
-      case Exception => false
+      case e: Exception => false
     }
   }
 

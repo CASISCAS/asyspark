@@ -19,7 +19,8 @@ import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.reflect.runtime.universe.{TypeTag, typeOf}
 /**
-  * The client is to spawn a large distributed model such as BigVector on parameter servers
+  * The client provides the functions needed to spawn large distributed matrices and vectors on the parameter servers.
+  * Use the companion object to construct a Client object from a configuration file.
   * Created by wjf on 16-9-24.
   */
 class Client(val config: Config, private[asyspark] val system: ActorSystem,
@@ -89,7 +90,7 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
   def bigVector[V: breeze.math.Semiring: TypeTag](keys: Long, modelsPerServer: Int = 1): BigVector[V] = {
     bigVector[V](keys, modelsPerServer, (partitions: Int, keys: Long) => RangePartitioner(partitions, keys))
   }
-  def bigVector[V: breeze.math.Semiring: TypeTag](keys: Long, modelsPerServer: Int = 1,
+  def bigVector[V: breeze.math.Semiring: TypeTag](keys: Long, modelsPerServer: Int,
                                                   createPartitioner: (Int, Long) => Partitioner): BigVector[V] = {
 
     val propFunction = numberType[V] match {
