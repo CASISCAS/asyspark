@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b13d6885-3010-4dfe-ae42-894b6e67c861" name="Default" comment="" />
+    <list default="true" id="b13d6885-3010-4dfe-ae42-894b6e67c861" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala" afterPath="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala" />
+    </list>
     <ignored path="spark-myExamples_2.11.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -37,8 +39,8 @@
       <file leaf-file-name="AsyBigVector.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVector.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1911">
-              <caret line="127" column="3" selection-start-line="127" selection-start-column="3" selection-end-line="127" selection-end-column="3" />
+            <state relative-caret-position="777">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding>
                 <element signature="e#61#128#0" expanded="true" />
               </folding>
@@ -46,37 +48,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsyBigVectorLong.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorLong.scala">
+      <file leaf-file-name="Client.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="506">
+              <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
               <folding>
-                <element signature="e#61#121#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AsyBigVectorInt.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorInt.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="730">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="e#62#88#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AsyBigVectorDouble.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorDouble.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-              <folding>
-                <element signature="e#60#86#0" expanded="true" />
+                <element signature="e#40#76#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,30 +89,6 @@
               <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#61#90#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PartialVector.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/server/PartialVector.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="35" column="35" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="41" />
-              <folding>
-                <element signature="e#54#93#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PartialVectorDouble.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/server/PartialVectorDouble.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="79" selection-start-line="9" selection-start-column="79" selection-end-line="9" selection-end-column="79" />
-              <folding>
-                <element signature="e#54#146#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -199,7 +153,6 @@
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/server/PartialVectorInt.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/server/PartialVectorFloat.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/server/PartialVectorLong.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Exceptios/PushFailedException.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/messages/server/logic/UniqueID.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/PushFSM.scala" />
@@ -211,6 +164,7 @@
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorFloat.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorDouble.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorInt.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala" />
       </list>
     </option>
   </component>
@@ -583,6 +537,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="asyspark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="asysgd" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1170,12 +1128,12 @@
       <workItem from="1474530972997" duration="1407000" />
       <workItem from="1474549907490" duration="2963000" />
       <workItem from="1474553829547" duration="22278000" />
-      <workItem from="1474705325395" duration="43219000" />
+      <workItem from="1474705325395" duration="44331000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69874000" />
+    <option name="totallyTimeSpent" value="70986000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1264,17 +1222,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.11/2.4.10/akka-actor_2.11-2.4.10-sources.jar!/akka/actor/Address.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="77" column="124" selection-start-line="77" selection-start-column="120" selection-end-line="77" selection-end-column="124" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#96#115#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Main.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -1521,16 +1468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="43" column="76" selection-start-line="43" selection-start-column="76" selection-end-line="43" selection-end-column="76" />
-          <folding>
-            <element signature="e#40#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/BigVector.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -1665,6 +1602,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorFloat.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding>
+            <element signature="e#62#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorLong.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
@@ -1685,16 +1632,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorFloat.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <element signature="e#62#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVectorDouble.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1705,10 +1642,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/Client.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/messages/master/ServerList.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/apache/spark/asyspark/core/models/client/asyImp/AsyBigVector.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1911">
-          <caret line="127" column="3" selection-start-line="127" selection-start-column="3" selection-end-line="127" selection-end-column="3" />
+        <state relative-caret-position="777">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding>
             <element signature="e#61#128#0" expanded="true" />
           </folding>
