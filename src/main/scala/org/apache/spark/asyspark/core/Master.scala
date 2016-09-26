@@ -37,7 +37,7 @@ class Master() extends Actor with ActorLogging {
       sender ! true
 
     case RegisterClient(client)  =>
-      log.info(s"Registering client ${client.path.toString}")
+      log.info(s"Registering client ${sender.path.toString}")
       clients += client
       context.watch(client)
       sender ! true

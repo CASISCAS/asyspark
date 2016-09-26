@@ -1,5 +1,6 @@
 package org.apache.spark.asyspark.core
 
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props, _}
@@ -24,7 +25,7 @@ import scala.reflect.runtime.universe.{TypeTag, typeOf}
   * Created by wjf on 16-9-24.
   */
 class Client(val config: Config, private[asyspark] val system: ActorSystem,
-             private[asyspark] val master: ActorRef) extends StrictLogging {
+             private[asyspark] val master: ActorRef) {
   private implicit val timeout = Timeout(config.getDuration("asyspark.client.timeout", TimeUnit.MILLISECONDS) milliseconds)
   private implicit val ec = ExecutionContext.Implicits.global
   private[asyspark] val actor = system.actorOf(Props[ClientActor])
@@ -122,7 +123,7 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
   }
 
   def serverList(): Future[Array[ActorRef]] = {
-    (master ? ServerList).mapTo[Array[ActorRef]]
+    (master ?  ServerList()).mapTo[Array[ActorRef]]
   }
 
   def numberType[V: TypeTag]: String = {
@@ -164,7 +165,7 @@ class Client(val config: Config, private[asyspark] val system: ActorSystem,
   *   val matrix = client.matrix[Double](10000, 50)
   * }}}
   */
-object Client {
+object Client extends StrictLogging {
 
   /**
     * Constructs a client with the default configuration
@@ -197,8 +198,10 @@ object Client {
   private def start(config: Config): Future[Client] = {
 
     // Get information from config
+    logger.debug("start client")
     val masterHost = config.getString("asyspark.master.host")
     val masterPort = config.getInt("asyspark.master.port")
+    println(masterPort)
     val masterName = config.getString("asyspark.master.name")
     val masterSystem = config.getString("asyspark.master.system")
 
@@ -217,6 +220,7 @@ object Client {
     masterFuture.flatMap {
       case m =>
         val client = new Client(config, system, m)
+        logger.debug("construct a client")
         client.registration.map {
           case true => client
           case _ => throw new RuntimeException("Invalid client registration response from master")
@@ -237,4 +241,17 @@ private class ClientActor extends Actor with ActorLogging {
   override def receive: Receive = {
     case x => log.info(s"Client actor received message ${x}")
   }
+}
+
+object TestClient {
+  def main(args: Array[String]): Unit = {
+
+    val default = ConfigFactory.parseResourcesAnySyntax("asyspark")
+    val config = ConfigFactory.parseFile(new File(getClass.getClassLoader.getResource("asyspark.conf").getFile)).withFallback(default).resolve()
+    val client =Client(config)
+    val vector  = client.bigVector[Long](2)
+    println(vector.size)
+
+  }
+
 }
