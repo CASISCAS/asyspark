@@ -1,3 +1,0 @@
-[framework] 2016-09-26 15:11:55,232 - org.apache.spark.asyspark.core.Main$ -0    [main] ERROR org.apache.spark.asyspark.core.Main$  - this is error
-[framework] 2016-09-26 15:11:55,233 - org.apache.spark.asyspark.core.Main$ -1    [main] DEBUG org.apache.spark.asyspark.core.Main$  - Parsing configuration file
-[framework] 2016-09-26 15:11:55,314 - org.apache.spark.asyspark.core.Master$ -82   [main] DEBUG org.apache.spark.asyspark.core.Master$  - Starting master actor system

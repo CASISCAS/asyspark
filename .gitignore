@@ -4,3 +4,4 @@ log/
 src/main/scala/org/apache/spark/myExamples
 src/main/scala/org/apache/spark/mySql
 .idea/
+*.log

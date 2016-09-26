@@ -250,6 +250,9 @@ object TestClient {
     val config = ConfigFactory.parseFile(new File(getClass.getClassLoader.getResource("asyspark.conf").getFile)).withFallback(default).resolve()
     val client =Client(config)
     val vector  = client.bigVector[Long](2)
+    val keys = Array[Long](1,2)
+    val values = Array[Long](1,2)
+//    vector.push()
     println(vector.size)
 
   }

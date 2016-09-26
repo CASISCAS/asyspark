@@ -47,8 +47,8 @@ object Main extends StrictLogging {
         c.copy(mode = "server")
       } text "Starts a server node."
     }
-    val arg =Array[String]("server")
-    parser.parse(arg, Options()) match {
+
+    parser.parse(args, Options()) match {
       case Some(options) =>
 
         // Read configuration
