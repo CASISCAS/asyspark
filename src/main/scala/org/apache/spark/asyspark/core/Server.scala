@@ -46,6 +46,7 @@ private object Server extends StrictLogging {
 
     logger.debug("Starting server actor")
     val server = system.actorOf(Props[Server], config.getString("asyspark.server.name"))
+    println(server.path)
 
     logger.debug("Reading master information from config")
     val masterHost = config.getString("asyspark.master.host")
@@ -58,6 +59,8 @@ private object Server extends StrictLogging {
     implicit val timeout = Timeout(config.getDuration("asyspark.server.registration-timeout", TimeUnit.MILLISECONDS) milliseconds)
     val master = system.actorSelection(s"akka.tcp://${masterSystem}@${masterHost}:${masterPort}/user/${masterName}")
     val registration = master ? RegisterServer(server)
+
+
 
     registration.map {
       case a =>

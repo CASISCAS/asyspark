@@ -142,18 +142,60 @@
                     <args>
                         <arg>-target:jvm-1.5</arg>
                     </args>
+
                 </configuration>
             </plugin>
+            <!--
+            to avoid some error ,we use shade plugin,
+            Note: the exclude is important
+            -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.7</version>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <sourceIncludes>
-                        <sourceInclude>*</sourceInclude>
-                    </sourceIncludes>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>org.apache.spark.asyspark.core.Main</mainClass>
+                        </transformer>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                            <resource>reference.conf</resource>
+                        </transformer>
+                    </transformers>
+
+
                 </configuration>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-eclipse-plugin</artifactId>-->
+                <!--<version>2.7</version>-->
+                <!--<configuration>-->
+                    <!--<sourceIncludes>-->
+                        <!--<sourceInclude>*</sourceInclude>-->
+                    <!--</sourceIncludes>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
 
         </plugins>
     </build>
@@ -165,7 +207,9 @@
                 <configuration>
                     <scalaVersion>${scala.version}</scalaVersion>
                 </configuration>
+
             </plugin>
+
 
         </plugins>
     </reporting>
